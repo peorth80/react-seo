@@ -11,15 +11,15 @@ var app = express();
 // REACT (for SEO)
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
+// Replace the default render wit hthe fact-react-render
+var ReactRender = require('fast-react-render');
 
 // This is our React component
 // NOTE : we require the app.js file NOT the main.js
-var Comp = React.createFactory(require('./src/app'));
+var element = React.createElement(require('./src/app'));
 
-// HTML REACT OUTPUT
-var seo = ReactDOMServer.renderToString(Comp());
-
-
+// HTML REACT OUTPUT BY fast-react-render
+var seo = ReactRender.elementToString(element, {context: {}});
 
 // MIDDLEWARES
 app.use(express.static(__dirname+'/public'));
