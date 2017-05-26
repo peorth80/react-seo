@@ -1,13 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var FortuneList = require('./fortunes.js');
+var GitHubUser = require('./github.js');
 
 
 module.exports = React.createClass({
   render: function() {  
     return (
       <div className="row">
-        <FortuneList />
+        <GitHubUser username="bluedge" />
       </div>
     );
   }

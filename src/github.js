@@ -1,22 +1,23 @@
-//src/fortunes.js
+//src/github.js
 var React = require('react');
 var axios = require('axios');
 
-var FortuneList = React.createClass({
+var GitHubUser = React.createClass({
 
     getInitialState: function() {
     return {
-      Fortunes: []
+      GitHub: []
     }
   },
 
   componentDidMount: function() {
     var _this = this;
+    var username = this.props.username
     this.serverRequest = 
-      axios.get('https://api.github.com/users/peorth80')
+      axios.get('https://api.github.com/users/' + username)
         .then(function(response){
             _this.setState({
-                Fortunes: response.data
+                GitHub: response.data
             })
         });  
     },
@@ -29,10 +30,10 @@ var FortuneList = React.createClass({
     return (
         <div>
         <h1>Bio</h1>
-        <p>{ JSON.stringify(this.state.Fortunes.bio) }</p>
+        <p>{ JSON.stringify(this.state.GitHub.company) }</p>
         </div>
     )
   }
 });
 
-module.exports = FortuneList;
+module.exports = GitHubUser;

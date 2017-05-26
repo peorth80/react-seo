@@ -24254,7 +24254,7 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var FortuneList = require('./fortunes.js');
+var GitHubUser = require('./github.js');
 
 module.exports = React.createClass({
   displayName: 'exports',
@@ -24263,33 +24263,34 @@ module.exports = React.createClass({
     return React.createElement(
       'div',
       { className: 'row' },
-      React.createElement(FortuneList, null)
+      React.createElement(GitHubUser, { username: 'bluedge' })
     );
   }
 });
 
-},{"./fortunes.js":205,"react":203,"react-dom":58}],205:[function(require,module,exports){
+},{"./github.js":205,"react":203,"react-dom":58}],205:[function(require,module,exports){
 'use strict';
 
-//src/fortunes.js
+//src/github.js
 var React = require('react');
 var axios = require('axios');
 
-var FortuneList = React.createClass({
-  displayName: 'FortuneList',
+var GitHubUser = React.createClass({
+  displayName: 'GitHubUser',
 
 
   getInitialState: function getInitialState() {
     return {
-      Fortunes: []
+      GitHub: []
     };
   },
 
   componentDidMount: function componentDidMount() {
     var _this = this;
-    this.serverRequest = axios.get('https://api.github.com/users/peorth80').then(function (response) {
+    var username = this.props.username;
+    this.serverRequest = axios.get('https://api.github.com/users/' + username).then(function (response) {
       _this.setState({
-        Fortunes: response.data
+        GitHub: response.data
       });
     });
   },
@@ -24310,13 +24311,13 @@ var FortuneList = React.createClass({
       React.createElement(
         'p',
         null,
-        JSON.stringify(this.state.Fortunes.bio)
+        JSON.stringify(this.state.GitHub.company)
       )
     );
   }
 });
 
-module.exports = FortuneList;
+module.exports = GitHubUser;
 
 },{"axios":1,"react":203}],206:[function(require,module,exports){
 'use strict';
