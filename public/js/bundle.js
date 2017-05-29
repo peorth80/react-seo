@@ -24263,7 +24263,7 @@ module.exports = React.createClass({
     return React.createElement(
       'div',
       { className: 'row' },
-      React.createElement(GitHubUser, { username: 'bluedge' })
+      React.createElement(GitHubUser, { username: 'thaJeztah' })
     );
   }
 });
@@ -24292,6 +24292,7 @@ var GitHubUser = React.createClass({
       _this.setState({
         GitHub: response.data
       });
+      console.log(response.data);
     });
   },
 
@@ -24308,6 +24309,7 @@ var GitHubUser = React.createClass({
         null,
         'Bio'
       ),
+      React.createElement('img', { src: this.state.GitHub.avatar_url }),
       React.createElement(
         'p',
         null,

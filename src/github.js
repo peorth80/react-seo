@@ -19,7 +19,8 @@ var GitHubUser = React.createClass({
             _this.setState({
                 GitHub: response.data
             })
-        });  
+            console.log(response.data);
+        }); 
     },
 
   componentWillUnmount: function() {
@@ -30,6 +31,7 @@ var GitHubUser = React.createClass({
     return (
         <div>
         <h1>Bio</h1>
+        <img src={this.state.GitHub.avatar_url} />
         <p>{ JSON.stringify(this.state.GitHub.company) }</p>
         </div>
     )
