@@ -5,7 +5,6 @@
   "private": true,
   "author": "Bluedge Ltd <nico@bluedge.co.uk>",
   "dependencies": {
-    "axios": "^0.16.1",
     "babel-core": "6.13.2",
     "cors": "^2.8.3",
     "ejs": "2.5.1",

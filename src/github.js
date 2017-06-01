@@ -1,26 +1,38 @@
 //src/github.js
 var React = require('react');
-var axios = require('axios');
+//var fetch = require('isomorphic-fetch');
 
 var GitHubUser = React.createClass({
 
     getInitialState: function() {
+      console.log("getInitialState");
     return {
-      GitHub: []
+      GitHub: {
+        company: 'Loading...'
+      }
     }
   },
 
+  componentWillMount: function() {
+    console.log("componentwillmount");
+  },
+
   componentDidMount: function() {
-    var _this = this;
+    var _this = this;    
     var username = this.props.username
+
     this.serverRequest = 
-      axios.get('https://api.github.com/users/' + username)
-        .then(function(response){
+      fetch('https://api.github.com/users/' + username).then(function(response) {
+            return (response.json());
+      }).then(function(j) {
+          console.log("then");
+          console.log(j);
             _this.setState({
-                GitHub: response.data
+                GitHub: j
             })
-            console.log(response.data);
-        }); 
+      }).catch(function(err) {
+        // Error :(
+      });
     },
 
   componentWillUnmount: function() {
@@ -32,7 +44,7 @@ var GitHubUser = React.createClass({
         <div>
         <h1>Bio</h1>
         <img src={this.state.GitHub.avatar_url} />
-        <p>{ JSON.stringify(this.state.GitHub.company) }</p>
+        <p>{ this.state.GitHub.company }</p>
         </div>
     )
   }

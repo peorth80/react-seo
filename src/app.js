@@ -8,6 +8,7 @@ module.exports = React.createClass({
     return (
       <div className="row">
         <GitHubUser username="thaJeztah" />
+        <GitHubUser username="bhaggs" />
       </div>
     );
   }
