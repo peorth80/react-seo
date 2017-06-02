@@ -21097,7 +21097,7 @@ var App = function (_React$Component) {
       return React.createElement(
         'div',
         { className: 'row' },
-        React.createElement(UserInfo, { Users: this.props.data, username: 'Bret' })
+        React.createElement(UserInfo, { users: this.props.data, username: 'Bret' })
       );
     }
   }]);
@@ -21128,6 +21128,8 @@ var _main2 = _interopRequireDefault(_main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+console.log(_main2.default);
+
 // Entry point of your App
 // #app is the DOM id in your HTML code 
 // where the reactjs code will be injected
@@ -21136,10 +21138,18 @@ _reactDom2.default.render(_react2.default.createElement(_app2.default, { data: _
 },{"../initialData/main":1,"./app":176,"react":175,"react-dom":30}],178:[function(require,module,exports){
 'use strict';
 
-//src/github.js
-var React = require('react');
+var _react = require('react');
 
-var GitHubUser = React.createClass({
+var _react2 = _interopRequireDefault(_react);
+
+var _main = require('../initialData/main');
+
+var _main2 = _interopRequireDefault(_main);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//src/github.js
+var GitHubUser = _react2.default.createClass({
   displayName: 'GitHubUser',
 
 
@@ -21148,24 +21158,57 @@ var GitHubUser = React.createClass({
   componentWillUnmount: function componentWillUnmount() {},
 
   render: function render() {
-    var choosenUser = this.props.username;
-    var allUsers = JSON.stringify(this.props.Users);
+    var choosenUser = this.props.username.length;
+    var users = this.props.users;
 
-    return React.createElement(
+    if (users === undefined) users = _main2.default;
+
+    var allUsers = users.map(function (item) {
+      return _react2.default.createElement(
+        'div',
+        { key: item.id },
+        _react2.default.createElement(
+          'ul',
+          null,
+          _react2.default.createElement(
+            'li',
+            null,
+            item.id
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            item.name
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            item.username
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            item.email
+          )
+        )
+      );
+    });
+
+    return _react2.default.createElement(
       'div',
       null,
-      React.createElement(
+      _react2.default.createElement(
         'h1',
         null,
         'Users'
       ),
-      React.createElement(
+      _react2.default.createElement(
         'h2',
         null,
         this.props.username
       ),
-      React.createElement(
-        'p',
+      _react2.default.createElement(
+        'div',
         null,
         allUsers,
         ' '
@@ -21176,4 +21219,4 @@ var GitHubUser = React.createClass({
 
 module.exports = GitHubUser;
 
-},{"react":175}]},{},[177]);
+},{"../initialData/main":1,"react":175}]},{},[177]);

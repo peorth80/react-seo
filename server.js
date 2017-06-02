@@ -1,5 +1,5 @@
 require('babel-core/register')({
-    presets: ['react']
+    presets: ['react', 'es2015']
 });
 
 

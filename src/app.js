@@ -14,7 +14,7 @@ class App extends React.Component {
     //console.log('App render');
     return (
       <div className="row">
-        <UserInfo Users={this.props.data} username="Bret" />
+        <UserInfo users={this.props.data} username="Bret" />
       </div>
     );
   }

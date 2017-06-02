@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './app';
 import initialData from '../initialData/main'
 
+console.log(initialData);
 
 // Entry point of your App
 // #app is the DOM id in your HTML code 
