@@ -21142,13 +21142,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _main = require('../initialData/main');
-
-var _main2 = _interopRequireDefault(_main);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//src/github.js
 var GitHubUser = _react2.default.createClass({
   displayName: 'GitHubUser',
 
@@ -21161,7 +21156,7 @@ var GitHubUser = _react2.default.createClass({
     var choosenUser = this.props.username.length;
     var users = this.props.users;
 
-    if (users === undefined) users = _main2.default;
+    if (users === undefined) users = initialData;
 
     var allUsers = users.map(function (item) {
       return _react2.default.createElement(
@@ -21215,8 +21210,9 @@ var GitHubUser = _react2.default.createClass({
       )
     );
   }
-});
+}); //src/github.js
+
 
 module.exports = GitHubUser;
 
-},{"../initialData/main":1,"react":175}]},{},[177]);
+},{"react":175}]},{},[177]);

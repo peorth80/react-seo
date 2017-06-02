@@ -1,6 +1,6 @@
 //src/github.js
 import React from 'react'
-import initialData from '../initialData/main';
+
 
 var GitHubUser = React.createClass({
 
@@ -15,7 +15,6 @@ var GitHubUser = React.createClass({
   render: function () {
     const choosenUser = this.props.username.length;
     let users = this.props.users;
-
 
     if (users === undefined)
       users = initialData;

@@ -1,6 +1,9 @@
 require('babel-core/register')({
     presets: ['react', 'es2015']
+    
 });
+
+const initialData = require('./initialData/main')
 
 
 // REQUIRES
@@ -16,10 +19,16 @@ var ReactRender = require('fast-react-render');
 
 // This is our React component
 // NOTE : we require the app.js file NOT the main.js
-var Comp = React.createFactory(require('./src/app'));
+const App = require('./src/app');
+
+const props = {
+  data:initialData.default
+}; 
+
+var Comp = React.createElement(App,props);
 
 // HTML REACT OUTPUT
-var seo = ReactDOMServer.renderToString(Comp());
+var seo = ReactDOMServer.renderToString(Comp);
 
 // MIDDLEWARES
 app.use(express.static(__dirname+'/public'));
