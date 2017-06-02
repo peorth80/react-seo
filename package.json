@@ -14,8 +14,10 @@
     "grunt-contrib-watch": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.11.0",
+    "prerender-node": "^2.7.1",
     "react": "15.3.0",
-    "react-dom": "15.3.0"
+    "react-dom": "15.3.0",
+    "react-resolver": "^3.1.0"
   },
   "scripts": {
     "start": "nodemon server.js",

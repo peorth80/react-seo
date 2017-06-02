@@ -20843,88 +20843,49 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var GitHubUser = require('./github.js');
+var UserInfo = require('./users.js');
 
 module.exports = React.createClass({
   displayName: 'exports',
+
+  propTypes: {},
+
+  getInitialState: function getInitialState() {
+    return {
+      Users: {
+        name: 'Loading...'
+      }
+    };
+  },
+
+  componentDidMount: function componentDidMount() {
+    var _this = this;
+
+    fetch('https://jsonplaceholder.typicode.com/users').then(function (response) {
+      return response.json();
+    }).then(function (j) {
+      _this.setState({
+        Users: j
+      }, function () {
+        //console.log(_this.state.Users);
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
+  },
+
+  componentDidUpdate: function componentDidUpdate() {},
 
   render: function render() {
     return React.createElement(
       'div',
       { className: 'row' },
-      React.createElement(GitHubUser, { username: 'thaJeztah' }),
-      React.createElement(GitHubUser, { username: 'bhaggs' })
+      React.createElement(UserInfo, { Users: this.state.Users, username: 'Bret' })
     );
   }
 });
 
-},{"./github.js":176,"react":174,"react-dom":29}],176:[function(require,module,exports){
-'use strict';
-
-//src/github.js
-var React = require('react');
-//var fetch = require('isomorphic-fetch');
-
-var GitHubUser = React.createClass({
-  displayName: 'GitHubUser',
-
-
-  getInitialState: function getInitialState() {
-    console.log("getInitialState");
-    return {
-      GitHub: {
-        company: 'Loading...'
-      }
-    };
-  },
-
-  componentWillMount: function componentWillMount() {
-    console.log("componentwillmount");
-  },
-
-  componentDidMount: function componentDidMount() {
-    var _this = this;
-    var username = this.props.username;
-
-    this.serverRequest = fetch('https://api.github.com/users/' + username).then(function (response) {
-      return response.json();
-    }).then(function (j) {
-      console.log("then");
-      console.log(j);
-      _this.setState({
-        GitHub: j
-      });
-    }).catch(function (err) {
-      // Error :(
-    });
-  },
-
-  componentWillUnmount: function componentWillUnmount() {
-    this.serverRequest.abort();
-  },
-
-  render: function render() {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'h1',
-        null,
-        'Bio'
-      ),
-      React.createElement('img', { src: this.state.GitHub.avatar_url }),
-      React.createElement(
-        'p',
-        null,
-        this.state.GitHub.company
-      )
-    );
-  }
-});
-
-module.exports = GitHubUser;
-
-},{"react":174}],177:[function(require,module,exports){
+},{"./users.js":177,"react":174,"react-dom":29}],176:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20936,4 +20897,48 @@ var App = require('./app');
 // where the reactjs code will be injected
 ReactDOM.render(React.createElement(App, null), document.querySelector("#app"));
 
-},{"./app":175,"react":174,"react-dom":29}]},{},[177]);
+},{"./app":175,"react":174,"react-dom":29}],177:[function(require,module,exports){
+'use strict';
+
+//src/github.js
+var React = require('react');
+
+var GitHubUser = React.createClass({
+  displayName: 'GitHubUser',
+
+
+  componentDidMount: function componentDidMount() {},
+
+  componentWillUnmount: function componentWillUnmount() {},
+
+  render: function render() {
+    var choosenUser = this.props.username;
+    var allUsers = JSON.stringify(this.props.Users);
+
+    console.log(allUsers);
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        null,
+        'Users'
+      ),
+      React.createElement(
+        'h2',
+        null,
+        this.props.username
+      ),
+      React.createElement(
+        'p',
+        null,
+        allUsers,
+        ' '
+      )
+    );
+  }
+});
+
+module.exports = GitHubUser;
+
+},{"react":174}]},{},[176]);
