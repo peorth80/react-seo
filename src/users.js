@@ -16,9 +16,6 @@ var GitHubUser = React.createClass({
     const choosenUser = this.props.username.length;
     let users = this.props.users;
 
-    if (users === undefined)
-      users = initialData;
-
     const allUsers = users.map((item) => {
       return (
         <div key={item.id}>

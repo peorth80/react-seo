@@ -1,6 +1,6 @@
 require('babel-core/register')({
-    presets: ['react', 'es2015']
-    
+  presets: ['react', 'es2015']
+
 });
 
 const initialData = require('./initialData/main')
@@ -10,6 +10,7 @@ const initialData = require('./initialData/main')
 var express = require("express");
 var app = express();
 var cors = require("cors");
+var fetch = require('node-fetch');
 
 // REACT (for SEO)
 var React = require('react');
@@ -21,17 +22,43 @@ var ReactRender = require('fast-react-render');
 // NOTE : we require the app.js file NOT the main.js
 const App = require('./src/app');
 
-const props = {
-  data:initialData.default
-}; 
 
-var Comp = React.createElement(App,props);
+function renderApp(res) {
 
-// HTML REACT OUTPUT
-var seo = ReactDOMServer.renderToString(Comp);
+  console.log('Fetching data...')
+
+  fetch('https://jsonplaceholder.typicode.com/users')
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log('Fetching data3...')
+
+      res.locals.seo = renderApp2(data);
+      res.render('index');
+
+    }).catch(function (err) {
+      console.log(err);
+    });
+
+  console.log('Fetching data2...')
+
+}
+
+function renderApp2(data) {
+
+  const props = {
+    data: data
+  };
+
+  var Comp = React.createElement(App, props);
+
+  // HTML REACT OUTPUT
+  return ReactDOMServer.renderToString(Comp);
+}
 
 // MIDDLEWARES
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
@@ -40,14 +67,15 @@ app.use(require('prerender-node'));
 app.use(cors());
 
 // Serve index file
-app.get("/", function(req, res) {
-  res.locals.seo = seo;
-  res.render('index'); 
+app.get("/", function (req, res) {
+
+  renderApp(res);
+
 });
 
 
 // Listen
-var server = app.listen(3001, 'localhost', function() {
+var server = app.listen(3001, 'localhost', function () {
   var host = server.address().address;
   var port = server.address().port;
   console.log('Server listening http://%s:%s', host, port);

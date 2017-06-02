@@ -13,6 +13,7 @@
     "fast-react-render": "^1.2.2",
     "grunt-contrib-watch": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
+    "node-fetch": "^1.7.0",
     "nodemon": "^1.11.0",
     "prerender-node": "^2.7.1",
     "react": "15.3.0",

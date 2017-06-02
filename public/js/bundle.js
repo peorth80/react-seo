@@ -21156,8 +21156,6 @@ var GitHubUser = _react2.default.createClass({
     var choosenUser = this.props.username.length;
     var users = this.props.users;
 
-    if (users === undefined) users = initialData;
-
     var allUsers = users.map(function (item) {
       return _react2.default.createElement(
         'div',
