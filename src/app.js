@@ -2,48 +2,22 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var UserInfo = require('./users.js');
 
-module.exports = React.createClass({
-    propTypes : {
+class App extends React.Component {
 
-    },
 
-    getInitialState: function() {
-    return {
-      Users: {
-        name: 'Loading...'
-      }
-    }
-  },
+  constructor(props) {
+    super(props);
 
-  componentDidMount: function() {
-    var _this = this;
-
-      fetch('https://jsonplaceholder.typicode.com/users')
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(j) {          
-        _this.setState({
-            Users: j
-        }, function () {
-              //console.log(_this.state.Users);
-        });
-      }).catch(function(err) {
-        console.log(err);
-      });
-
-  },
-
-  componentDidUpdate: function() {
-    
-  },
-
-  render: function() {  
+  }
+ 
+  render () {
+    //console.log('App render');
     return (
       <div className="row">
-        <UserInfo Users={this.state.Users} username="Bret" />
+        <UserInfo Users={this.props.data} username="Bret" />
       </div>
     );
-  },
-});
+  }
+}
 
+module.exports = App;

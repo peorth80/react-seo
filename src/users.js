@@ -15,7 +15,7 @@ var GitHubUser = React.createClass({
     var choosenUser = this.props.username;
     var allUsers = JSON.stringify(this.props.Users);
     
-    console.log(allUsers);
+    
     return (
         <div>
         <h1>Users</h1>
