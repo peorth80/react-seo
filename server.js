@@ -32,17 +32,12 @@ function renderApp(res) {
       return response.json();
     })
     .then(function (data) {
-      console.log('Fetching data3...')
-
       res.locals.seo = renderApp2(data);
       res.render('index');
 
     }).catch(function (err) {
       console.log(err);
     });
-
-  console.log('Fetching data2...')
-
 }
 
 function renderApp2(data) {
@@ -54,7 +49,7 @@ function renderApp2(data) {
   var Comp = React.createElement(App, props);
 
   // HTML REACT OUTPUT
-  return ReactDOMServer.renderToString(Comp);
+  return ReactRender.elementToString(Comp);
 }
 
 // MIDDLEWARES
@@ -68,9 +63,7 @@ app.use(cors());
 
 // Serve index file
 app.get("/", function (req, res) {
-
   renderApp(res);
-
 });
 
 

@@ -21097,7 +21097,7 @@ var App = function (_React$Component) {
       return React.createElement(
         'div',
         { className: 'row' },
-        React.createElement(UserInfo, { users: this.props.data, username: 'Bret' })
+        React.createElement(UserInfo, { users: this.props.data, username: 'Leopoldo_Corkery' })
       );
     }
   }]);
@@ -21142,24 +21142,56 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//src/github.js
 var GitHubUser = _react2.default.createClass({
   displayName: 'GitHubUser',
 
+  componentDidMount: function componentDidMount() {
+    var currentUser = _reactDom2.default.findDOMNode(this.refs.selectedUser);
 
-  componentDidMount: function componentDidMount() {},
+    if (currentUser != null) {
+      currentUser.className = "selectedUser";
+    }
+  },
 
   componentWillUnmount: function componentWillUnmount() {},
 
   render: function render() {
-    var choosenUser = this.props.username.length;
+    var choosenUser = this.props.username;
     var users = this.props.users;
 
     var allUsers = users.map(function (item) {
+      var userRow = null;
+      var selectedUser = null;
+      if (choosenUser == item.username) {
+        userRow = _react2.default.createElement(
+          'li',
+          null,
+          _react2.default.createElement(
+            'strong',
+            null,
+            item.username
+          )
+        );
+        selectedUser = "selectedUser";
+      } else {
+        userRow = _react2.default.createElement(
+          'li',
+          null,
+          item.username
+        );
+        selectedUser = "";
+      }
+
       return _react2.default.createElement(
         'div',
-        { key: item.id },
+        { key: item.username, ref: selectedUser },
         _react2.default.createElement(
           'ul',
           null,
@@ -21173,11 +21205,7 @@ var GitHubUser = _react2.default.createClass({
             null,
             item.name
           ),
-          _react2.default.createElement(
-            'li',
-            null,
-            item.username
-          ),
+          userRow,
           _react2.default.createElement(
             'li',
             null,
@@ -21208,9 +21236,8 @@ var GitHubUser = _react2.default.createClass({
       )
     );
   }
-}); //src/github.js
-
+});
 
 module.exports = GitHubUser;
 
-},{"react":175}]},{},[177]);
+},{"react":175,"react-dom":30}]},{},[177]);
